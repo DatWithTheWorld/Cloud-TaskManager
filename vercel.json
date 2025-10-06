@@ -20,10 +20,7 @@
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ],
-  "env": {
-    "REACT_APP_CONVEX_URL": "@convex-url"
-  }
+  ]
 }
 
 
