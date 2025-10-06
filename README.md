@@ -1,46 +1,182 @@
-# Getting Started with Create React App
+# Modern Task Management App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A beautiful, modern task management web application built with React.js, TypeScript, Convex DB, and Tailwind CSS. Deployable on Vercel with real-time synchronization.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **Modern UI/UX**: Clean, responsive design with Tailwind CSS
+- **Real-time Sync**: Powered by Convex for instant updates across devices
+- **Task Management**: Create, edit, delete, and toggle task completion
+- **Priority System**: Organize tasks with low, medium, and high priorities
+- **Due Dates**: Set and track task deadlines with visual indicators
+- **Filtering**: Filter tasks by completion status and priority
+- **Statistics**: View task completion statistics at a glance
+- **TypeScript**: Full type safety throughout the application
+- **Responsive**: Works perfectly on desktop, tablet, and mobile devices
 
-### `npm start`
+## 🛠️ Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Frontend**: React 18 with TypeScript
+- **Styling**: Tailwind CSS with custom design system
+- **Database**: Convex (real-time database)
+- **Icons**: Lucide React
+- **Deployment**: Vercel
+- **Build Tool**: Create React App
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 📦 Installation
 
-### `npm test`
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd task-manager
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-### `npm run build`
+3. **Set up Convex**
+   ```bash
+   npx convex dev
+   ```
+   Follow the prompts to create your Convex project and get your deployment URL.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. **Configure environment variables**
+   ```bash
+   cp env.example .env.local
+   ```
+   Update `.env.local` with your Convex deployment URL:
+   ```
+   REACT_APP_CONVEX_URL=https://your-convex-deployment.convex.cloud
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5. **Start the development server**
+   ```bash
+   npm start
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🚀 Deployment on Vercel
 
-### `npm run eject`
+### Method 1: Vercel CLI (Recommended)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. **Install Vercel CLI**
+   ```bash
+   npm i -g vercel
+   ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. **Login to Vercel**
+   ```bash
+   vercel login
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+3. **Deploy**
+   ```bash
+   vercel
+   ```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+4. **Set environment variables**
+   ```bash
+   vercel env add REACT_APP_CONVEX_URL
+   ```
+   Enter your Convex deployment URL when prompted.
 
-## Learn More
+### Method 2: Vercel Dashboard
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. **Connect your repository** to Vercel
+2. **Set environment variables** in the Vercel dashboard:
+   - `REACT_APP_CONVEX_URL`: Your Convex deployment URL
+3. **Deploy** - Vercel will automatically build and deploy your app
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🗄️ Database Schema
+
+The application uses the following Convex schema:
+
+### Tasks Table
+- `title`: Task title (required)
+- `description`: Optional task description
+- `completed`: Boolean completion status
+- `priority`: Priority level (low, medium, high)
+- `dueDate`: Optional due date (ISO string)
+- `createdAt`: Creation timestamp
+- `updatedAt`: Last update timestamp
+- `userId`: User identifier
+
+### Users Table
+- `name`: User display name
+- `email`: User email address
+- `image`: Optional profile image URL
+
+## 🎨 Customization
+
+### Styling
+The app uses Tailwind CSS with a custom color palette. You can customize the design by modifying:
+- `tailwind.config.js` - Color scheme and design tokens
+- `src/index.css` - Global styles and custom CSS
+- Component files - Individual component styling
+
+### Features
+To add new features:
+1. Update the Convex schema in `convex/schema.ts`
+2. Add new mutations/queries in `convex/tasks.ts`
+3. Create new React components in `src/components/`
+4. Update the main `TaskManager` component
+
+## 🔧 Development
+
+### Available Scripts
+
+- `npm start` - Start development server
+- `npm run build` - Build for production
+- `npm test` - Run tests
+- `npm run eject` - Eject from Create React App
+
+### Project Structure
+
+```
+src/
+├── components/          # React components
+│   ├── TaskManager.tsx  # Main application component
+│   ├── AddTaskForm.tsx  # Task creation form
+│   ├── TaskList.tsx     # Task list container
+│   ├── TaskItem.tsx     # Individual task component
+│   └── FilterBar.tsx    # Task filtering controls
+├── App.tsx             # Root component with Convex provider
+└── index.css          # Global styles and Tailwind imports
+
+convex/
+├── schema.ts           # Database schema definition
+└── tasks.ts            # Database mutations and queries
+```
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **Convex connection issues**
+   - Ensure your `REACT_APP_CONVEX_URL` is correct
+   - Check that your Convex project is deployed and running
+
+2. **Build errors**
+   - Run `npm run build` to check for TypeScript errors
+   - Ensure all dependencies are installed with `npm install`
+
+3. **Styling issues**
+   - Verify Tailwind CSS is properly configured
+   - Check that `src/index.css` imports Tailwind directives
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📞 Support
+
+If you encounter any issues or have questions, please open an issue on GitHub.
+
+---
+
+Built with ❤️ using React, Convex, and Tailwind CSS
